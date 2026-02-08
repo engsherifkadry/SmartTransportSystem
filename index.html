@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام النقل الذكي | الحل الشامل لإدارة أسطولك</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f97316;
+            --accent: #10b981;
+            --bg-dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .font-special {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.1), transparent 40%);
+        }
+
+        .hero-img-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            filter: blur(40px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Grid Hover Effect */
+        .screen-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .screen-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 10;
+        }
+
+        .screen-card img {
+            transition: all 0.5s ease;
+        }
+
+        .screen-card:hover img {
+            filter: brightness(0.6);
+        }
+
+        .screen-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .screen-card:hover .screen-overlay {
+            opacity: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="gradient-bg">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-[100] glass-nav">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                    <i class="fas fa-truck-fast text-white text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight">نظام النقل الذكي</span>
+                    <p class="text-[10px] text-blue-400 uppercase tracking-widest font-bold">Smart Logistics Solution
+                    </p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 font-bold text-gray-300">
+                <a href="#features" class="hover:text-blue-500 transition-colors">المميزات</a>
+                <a href="#screens" class="hover:text-blue-500 transition-colors">واجهات النظام</a>
+                <a href="#demo" class="hover:text-blue-500 transition-colors">فيديو الشرح</a>
+                <a href="#contact" class="hover:text-blue-500 transition-colors">تواصل معنا</a>
+            </div>
+
+            <a href="https://wa.me/201019943147" target="_blank"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-blue-600/20 transition-all transform hover:scale-105 hidden sm:block">
+                اطلب نسختك
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-20 overflow-hidden">
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 text-center lg:text-right">
+
+                <h1 class="text-5xl lg:text-7xl font-black mb-6 leading-tight">
+                    أدر أسطولك بذكاء <br>
+                    <span class="gradient-text">وعزز أرباحك</span>
+                </h1>
+                <p class="text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl">
+                    الحل التقني الأمثل لشركات النقل والخدمات اللوجستية. تتبع الشاحنات، إدارة السائقين، مراقبة الرحلات،
+                    وحسابات مالية دقيقة في منصة واحدة ساحرة.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#screens"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-600/20 transition-all transform hover:scale-105 flex items-center justify-center gap-3">
+                        <i class="fas fa-desktop"></i> استعراض الشاشات
+                    </a>
+                    <a href="#demo"
+                        class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-2xl font-bold text-lg border border-gray-700 transition-all flex items-center justify-center gap-3">
+                        <i class="fas fa-play"></i> مشاهدة ديمو
+                    </a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 relative">
+                <div class="hero-img-container glass-card p-3 animate-float relative z-10">
+                    <img src="لوحة التحكم.JPG" alt="Dashboard" class="rounded-xl shadow-2xl">
+                </div>
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-blue-600/20 blur-[100px] rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 text-center">
+                    <p class="text-4xl font-black text-blue-500 mb-2">+15</p>
+                    <p class="text-gray-400 font-bold">شاشة إدارية</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <p class="text-4xl font-black text-green-500 mb-2">100%</p>
+                    <p class="text-gray-400 font-bold">تتبع دقيق للرحلات</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <p class="text-4xl font-black text-orange-500 mb-2">VAT</p>
+                    <p class="text-gray-400 font-bold">نظام ضريبي متكامل</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <p class="text-4xl font-black text-purple-500 mb-2">Live</p>
+                    <p class="text-gray-400 font-bold">تحديثات لحظية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-black mb-4">مميزات تجعل الإدارة أسهل</h2>
+                <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 hover:bg-white/10 transition-colors group">
+                    <div
+                        class="w-16 h-16 bg-blue-500/20 text-blue-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">إدارة الرحلات الذكية</h3>
+                    <p class="text-gray-400 leading-relaxed">تنظيم الرحلات وحساب المسافات والوقود والتكاليف بدقة متناهية
+                        مع نظام تنبيهات ذكي.</p>
+                </div>
+                <div class="glass-card p-8 hover:bg-white/10 transition-colors group">
+                    <div
+                        class="w-16 h-16 bg-green-500/20 text-green-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">محاسبة مالية قوية</h3>
+                    <p class="text-gray-400 leading-relaxed">كشوف حسابات العملاء، سحوبات السائقين، المصروفات، والتقارير
+                        الضريبية بضغطة زر واحدة.</p>
+                </div>
+                <div class="glass-card p-8 hover:bg-white/10 transition-colors group">
+                    <div
+                        class="w-16 h-16 bg-orange-500/20 text-orange-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">أمن البيانات والصلاحيات</h3>
+                    <p class="text-gray-400 leading-relaxed">نظام متطور لإدارة المستخدمين وتوزيع الصلاحيات لضمان أقصى
+                        درجات الخصوصية والأمان.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="screens" class="py-24 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-black mb-4">واجهات النظام الساحرة</h2>
+                <p class="text-gray-400">تصميم عصري يركز على تجربة المستخدم وسهولة الوصول للمعلومات</p>
+                <div class="w-24 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Screen 1: Dashboard -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="لوحة التحكم.JPG" alt="لوحة التحكم" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">لوحة التحكم المركزية</span>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Fleet Tracking -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="تتبع الاسطول.JPG" alt="تتبع الاسطول" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">نظام تتبع الأسطول</span>
+                    </div>
+                </div>
+
+                <!-- Screen 3: Operations -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="قائمة العمليات.JPG" alt="قائمة العمليات" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة العمليات والرحلات</span>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Financial Reports -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="تقاير مالية شاملة وكشوف حسابات العملاء والسائقين وتقرير ضريبة القيمة المضافة.JPG"
+                        alt="تقاير مالية" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">التقارير المالية والضريبية</span>
+                    </div>
+                </div>
+
+                <!-- Screen 5: Drivers -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="السائقين.JPG" alt="السائقين" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة بيانات السائقين</span>
+                    </div>
+                </div>
+
+                <!-- Screen 6: Trucks -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="الشاحنات.JPG" alt="الشاحنات" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة أسطول الشاحنات</span>
+                    </div>
+                </div>
+
+                <!-- Screen 7: Customers Payments -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="استلام دفعات العملاء.JPG" alt="دفعات العملاء" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">أوامر قبض ودفعات العملاء</span>
+                    </div>
+                </div>
+
+                <!-- Screen 8: Expenses -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="المصروفات.JPG" alt="المصروفات" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة المصروفات التشغيلية</span>
+                    </div>
+                </div>
+
+                <!-- Screen 9: Permissions -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="الصلاحيات.JPG" alt="الصلاحيات" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة الأدوار والصلاحيات</span>
+                    </div>
+                </div>
+
+                <!-- Screen 10: General Settings -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="الاعدادات العامة.JPG" alt="الاعدادات العامة" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">الإعدادات العامة للنظام</span>
+                    </div>
+                </div>
+
+                <!-- Screen 11: Customers -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="العملاء.JPG" alt="العملاء" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">سجل العملاء المتكامل</span>
+                    </div>
+                </div>
+
+                <!-- Screen 12: Driver Withdrawals -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="سحوبات السائقين.JPG" alt="سحوبات السائقين" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة سلف وعُهد السائقين</span>
+                    </div>
+                </div>
+
+                <!-- Screen 13: Comprehensive Reports -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="تقارير شاملة مثل العملاء السائقين الشاحنات العمليات المصروفات المالية.JPG"
+                        alt="تقارير شاملة" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">مركز التقارير الشامل</span>
+                    </div>
+                </div>
+
+                <!-- Screen 14: Edit Users -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="تعديل المستخدمين.JPG" alt="تعديل المستخدمين" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">إدارة مستخدمي النظام</span>
+                    </div>
+                </div>
+
+                <!-- Screen 15: Edit Trip -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="تعديل رحلة من لوحة التحكم.JPG" alt="تعديل رحلة" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">تعديل وإدارة الرحلات المباشر</span>
+                    </div>
+                </div>
+
+                <!-- Screen 16: Communication -->
+                <div class="screen-card glass-card p-2 group">
+                    <img src="شاشة التواصل.JPG" alt="شاشة التواصل" class="rounded-xl w-full h-auto">
+                    <div class="screen-overlay">
+                        <span class="text-white font-bold text-xl">لوحة التواصل الفوري</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Demo Section -->
+    <section id="demo" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="glass-card overflow-hidden p-4 lg:p-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl lg:text-5xl font-black mb-6 leading-tight">شاهد النظام <br><span
+                                class="gradient-text">فيديو شرح برنامج ادارة النقليات</span></h2>
+                        <p class="text-gray-400 text-lg mb-8">لقد قمنا بتسجيل نظرة عامة شاملة توضح كيف يمكن لنظامنا أن
+                            يحول إدارة أسطولك من عملية يدوية معقدة إلى تجربة رقمية سهلة ومربحة.</p>
+
+                    </div>
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-orange-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                        </div>
+                        <video controls
+                            class="relative rounded-2xl shadow-2xl border border-white/10 w-full overflow-hidden">
+                            <source src="شرح برنامج النقليات.mp4" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto glass-card p-8 lg:p-16 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px]"></div>
+
+                <div class="text-center mb-16 relative z-10">
+                    <h2 class="text-4xl lg:text-6xl font-black mb-6">هل أنت جاهز للبدء؟</h2>
+                    <p class="text-xl text-gray-400">فريقنا جاهز للرد على استفساراتك وتقديم العروض المناسبة لحجم عملك
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <a href="mailto:transportrefreg@gmail.com"
+                        class="glass-card p-10 flex flex-col items-center text-center hover:bg-white/10 transition-all border-blue-500/20">
+                        <div
+                            class="w-20 h-20 bg-blue-500/20 text-blue-500 rounded-full flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">راسلنا عبر البريد</h4>
+                        <p class="text-blue-400 font-bold break-all">transportrefreg@gmail.com</p>
+                    </a>
+
+                    <a href="https://wa.me/201019943147" target="_blank"
+                        class="glass-card p-10 flex flex-col items-center text-center hover:bg-white/10 transition-all border-green-500/20">
+                        <div
+                            class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-3xl mb-6">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">تواصل عبر واتساب</h4>
+                        <p class="text-green-500 font-bold">00201019943147</p>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-gray-500 mb-6">أو اترك بياناتك وسنعاود الاتصال بك</p>
+                    <button id="cta-btn"
+                        onclick="window.open('https://wa.me/201019943147?text=ارغب%20في%20معرفة%20المزيد%20عن%20نظام%20النقليات', '_blank')"
+                        class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:shadow-blue-600/40 transition-all transform hover:scale-105">
+                        اطلب عرض سعر الآن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-truck-fast text-white"></i>
+                    </div>
+                    <span class="text-lg font-bold">نظام النقل الذكي</span>
+                </div>
+
+                <div class="text-gray-500 text-sm font-bold">
+                    &copy; 2024 جميع الحقوق محفوظة لنظام النقل الذكي
+                </div>
+
+                <div class="flex gap-6 text-xl">
+
+                    <a href="https://wa.me/201019943147" class="text-gray-400 hover:text-green-500 transition-colors"><i
+                            class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple Fade-in Observer
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
