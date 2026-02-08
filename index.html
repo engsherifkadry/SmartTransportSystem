@@ -16,9 +16,12 @@
             --primary-dark: #1e40af;
             --secondary: #f97316;
             --accent: #10b981;
-            --bg-dark: #0f172a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-light: #ffffff;
+            --section-bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --glass: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(37, 99, 235, 0.1);
         }
 
         * {
@@ -29,8 +32,8 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-dark);
-            color: #f8fafc;
+            background-color: var(--bg-light);
+            color: var(--text-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
@@ -47,15 +50,19 @@
 
         /* Glassmorphism Classes */
         .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-light);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.1);
         }
 
         .glass-nav {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--glass-border);
@@ -88,8 +95,8 @@
         }
 
         .gradient-bg {
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 40%),
-                radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.1), transparent 40%);
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.03), transparent 40%);
         }
 
         .hero-img-container::before {
@@ -169,13 +176,13 @@
                     <i class="fas fa-truck-fast text-white text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-extrabold tracking-tight">>برنامج إدارة النقليات المتطور</span>
+                    <span class="text-xl font-extrabold tracking-tight">نظام النقل الذكي</span>
                     <p class="text-[10px] text-blue-400 uppercase tracking-widest font-bold">Smart Logistics Solution
                     </p>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-8 font-bold text-gray-300">
+            <div class="hidden md:flex items-center gap-8 font-bold text-slate-700">
                 <a href="#features" class="hover:text-blue-500 transition-colors">المميزات</a>
                 <a href="#screens" class="hover:text-blue-500 transition-colors">واجهات النظام</a>
                 <a href="#demo" class="hover:text-blue-500 transition-colors">فيديو الشرح</a>
@@ -195,10 +202,9 @@
             <div class="lg:w-1/2 text-center lg:text-right">
 
                 <h1 class="text-5xl lg:text-7xl font-black mb-6 leading-tight">
-                    أدر أسطولك بذكاء <br>
-                    <span class="gradient-text">برنامج إدارة النقليات المتطور - شريكك الموثوق في رحلة النجاح</span>
+                    برنامج إدارة النقليات <span class="gradient-text">المتطور</span>
                 </h1>
-                <p class="text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl">
+                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
                     الحل التقني الأمثل لشركات النقل والخدمات اللوجستية. تتبع الشاحنات، إدارة السائقين، مراقبة الرحلات،
                     وحسابات مالية دقيقة في منصة واحدة.
                 </p>
@@ -208,7 +214,7 @@
                         <i class="fas fa-desktop"></i> استعراض الشاشات
                     </a>
                     <a href="#demo"
-                        class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-2xl font-bold text-lg border border-gray-700 transition-all flex items-center justify-center gap-3">
+                        class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-8 py-4 rounded-2xl font-bold text-lg border border-slate-200 transition-all flex items-center justify-center gap-3">
                         <i class="fas fa-play"></i> مشاهدة ديمو
                     </a>
                 </div>
@@ -223,29 +229,7 @@
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card p-6 text-center">
-                    <p class="text-4xl font-black text-blue-500 mb-2">+15</p>
-                    <p class="text-gray-400 font-bold">شاشة إدارية</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <p class="text-4xl font-black text-green-500 mb-2">100%</p>
-                    <p class="text-gray-400 font-bold">تتبع دقيق للرحلات</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <p class="text-4xl font-black text-orange-500 mb-2">VAT</p>
-                    <p class="text-gray-400 font-bold">نظام ضريبي متكامل</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <p class="text-4xl font-black text-purple-500 mb-2">Live</p>
-                    <p class="text-gray-400 font-bold">تحديثات لحظية</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Features -->
     <section id="features" class="py-24">
@@ -262,8 +246,8 @@
                         <i class="fas fa-route"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">إدارة الرحلات الذكية</h3>
-                    <p class="text-gray-400 leading-relaxed">تنظيم الرحلات وحساب المسافات والوقود والتكاليف بدقة متناهية
-                        مع نظام تنبيهات ذكي.</p>
+                    <p class="text-slate-600 leading-relaxed">تنظيم الرحلات بين المدن والتكاليف بدقة متناهية مع تقارير
+                        شاملة.</p>
                 </div>
                 <div class="glass-card p-8 hover:bg-white/10 transition-colors group">
                     <div
@@ -271,7 +255,7 @@
                         <i class="fas fa-coins"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">محاسبة مالية قوية</h3>
-                    <p class="text-gray-400 leading-relaxed">كشوف حسابات العملاء، سحوبات السائقين، المصروفات، والتقارير
+                    <p class="text-slate-600 leading-relaxed">كشوف حسابات العملاء، سحوبات السائقين، المصروفات، والتقارير
                         الضريبية بضغطة زر واحدة.</p>
                 </div>
                 <div class="glass-card p-8 hover:bg-white/10 transition-colors group">
@@ -280,7 +264,7 @@
                         <i class="fas fa-shield-halved"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">أمن البيانات والصلاحيات</h3>
-                    <p class="text-gray-400 leading-relaxed">نظام متطور لإدارة المستخدمين وتوزيع الصلاحيات لضمان أقصى
+                    <p class="text-slate-600 leading-relaxed">نظام متطور لإدارة المستخدمين وتوزيع الصلاحيات لضمان أقصى
                         درجات الخصوصية والأمان.</p>
                 </div>
             </div>
@@ -288,11 +272,11 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="screens" class="py-24 bg-slate-900/50">
+    <section id="screens" class="py-24 bg-slate-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-black mb-4">واجهات النظام</h2>
-                <p class="text-gray-400">تصميم عصري يركز على تجربة المستخدم وسهولة الوصول للمعلومات</p>
+                <p class="text-slate-600">تصميم عصري يركز على تجربة المستخدم وسهولة الوصول للمعلومات</p>
                 <div class="w-24 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
             </div>
 
@@ -438,7 +422,7 @@
                     <div>
                         <h2 class="text-4xl lg:text-5xl font-black mb-6 leading-tight">شاهد النظام <br><span
                                 class="gradient-text">فيديو شرح برنامج ادارة النقليات</span></h2>
-                        <p class="text-gray-400 text-lg mb-8">لقد قمنا بتسجيل نظرة عامة شاملة توضح كيف يمكن لنظامنا أن
+                        <p class="text-slate-600 text-lg mb-8">لقد قمنا بتسجيل نظرة عامة شاملة توضح كيف يمكن لنظامنا أن
                             يحول إدارة أسطولك من عملية يدوية معقدة إلى تجربة رقمية سهلة ومربحة.</p>
 
                     </div>
@@ -465,7 +449,7 @@
 
                 <div class="text-center mb-16 relative z-10">
                     <h2 class="text-4xl lg:text-6xl font-black mb-6">هل أنت جاهز للبدء؟</h2>
-                    <p class="text-xl text-gray-400">للرد على استفساراتك
+                    <p class="text-xl text-slate-600">للرد على استفساراتك
                     </p>
                 </div>
 
@@ -492,10 +476,10 @@
                 </div>
 
                 <div class="text-center">
-                    <p class="text-gray-500 mb-6">أو اترك بياناتك وسنعاود الاتصال بك</p>
+                    <p class="text-slate-500 mb-6">أو اترك بياناتك وسنعاود الاتصال بك</p>
                     <button id="cta-btn"
                         onclick="window.open('https://wa.me/201019943147?text=ارغب%20في%20معرفة%20المزيد%20عن%20نظام%20النقليات', '_blank')"
-                        class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:shadow-blue-600/40 transition-all transform hover:scale-105">
+                        class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 transition-all transform hover:scale-105">
                         اطلب عرض سعر الآن
                     </button>
                 </div>
@@ -514,13 +498,14 @@
                     <span class="text-lg font-bold">نظام النقل الذكي</span>
                 </div>
 
-                <div class="text-gray-500 text-sm font-bold">
+                <div class="text-slate-500 text-sm font-bold">
                     &copy; 2024 جميع الحقوق محفوظة لنظام النقل الذكي
                 </div>
 
                 <div class="flex gap-6 text-xl">
 
-                    <a href="https://wa.me/201019943147" class="text-gray-400 hover:text-green-500 transition-colors"><i
+                    <a href="https://wa.me/201019943147"
+                        class="text-slate-400 hover:text-green-500 transition-colors"><i
                             class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
